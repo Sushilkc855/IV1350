@@ -14,7 +14,7 @@ public class Sale {
     private double totalAmout;
     
     /**
-     * Creates a new instance and saces the time of the sale.
+     * Creates a new instance and saves the time of the sale.
     */
     public Sale(){
         saleTime = LocalTime.now();
