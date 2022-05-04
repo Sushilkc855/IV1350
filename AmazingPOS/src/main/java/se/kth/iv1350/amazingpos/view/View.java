@@ -45,7 +45,8 @@ public class View {
         //false because it is not registered in sale yet. 
         System.out.println(register);
 
-
+        // The total amount for tha sale 
+        System.out.println(contr.totalAmoutn());
 
 
     }
