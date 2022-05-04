@@ -46,7 +46,7 @@ public class Sale {
     */
     public void additem(ItemInformationDTO item, boolean itemCheck){
         if (item != null && itemCheck == false){
-            itemList.add(item); 
+            itemList.add(new ItemInformationDTO(item.getItemName(), item.getItemIdentifier(), item.getItemPrice(), item.getItemVATRate(), item.getItemQuantity())); 
         }
     }
 

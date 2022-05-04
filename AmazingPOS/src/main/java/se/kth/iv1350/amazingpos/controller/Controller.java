@@ -9,7 +9,7 @@ import se.kth.iv1350.amazingpos.integration.*;
  */
 public class Controller {   
     private Sale sale; 
-    private ExternelInventorySystem externelInventorySystem; 
+    private ExternelInventorySystem externelInventorySystem = new ExternelInventorySystem(); 
     private ExternelAccountingSystem externelAccountingSystem; 
     private DiscountDB discountDB; 
     private boolean itemCheck;
@@ -43,6 +43,7 @@ public class Controller {
      */
     public ItemInformationDTO getItemInfo (String itemIdentifier){
         ItemInformationDTO itemInfo = externelInventorySystem.getItemInfomation(itemIdentifier); 
+        itemCheck = itemAlreadyRegister(itemIdentifier);
         sale.additem(itemInfo, itemCheck);
         return itemInfo; 
     }

@@ -7,15 +7,23 @@ import java.util.ArrayList;
  * @author Sushil's pc
  */
 public class ExternelInventorySystem {
-     
-
-    private ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
-
-
+    
+    public ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
     /**
      * An instance of the EXternelInventorySystem. 
      */
     public ExternelInventorySystem(){
+        itemList.add(new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10));
+    }
+  
+      /**
+     * Adds a new item to the inventory where all the information about the items are stored.  
+     * @param item The item that is added to the inventory. 
+     */
+    public void additem(ItemInformationDTO item){
+        if (item != null){
+            itemList.add(item); 
+        }
     }
     
     /**
@@ -26,23 +34,16 @@ public class ExternelInventorySystem {
      * it returns null. 
      */
     public ItemInformationDTO getItemInfomation (String itemIdentifier){
-        for (ItemInformationDTO itemsInInventoryLoopVariabel : itemList) {
-            if (itemsInInventoryLoopVariabel.getItemIdentifier().equals(itemIdentifier)) {
-                return itemsInInventoryLoopVariabel;
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getItemIdentifier().equals(itemIdentifier)) {
+                return itemList.get(i);
             }   
         }
+        
     return null; 
     }
 
-    /**
-     * Adds a new item to the inventory where all the information about the items are stored.  
-     * @param item The item that is added to the inventory. 
-     */
-    public void additem(ItemInformationDTO item){
-        if (item != null){
-            itemList.add(item); 
-        }
-    }
+  
     
     /**
      * Updates the inventory when the sale ends.  

@@ -32,6 +32,7 @@ public class ItemInformationDTO {
     /**
      * Creates new default of iteminformationDTO
      */
+    
     public ItemInformationDTO(){
         itemName ="";
         itemPrice = 0;
@@ -72,7 +73,7 @@ public class ItemInformationDTO {
     /**
      * @return. Returns the quntity of the item.  
      */
-    public double getItemQuantity(){
+    public int getItemQuantity(){
         return this.quantity;
     }
 }
