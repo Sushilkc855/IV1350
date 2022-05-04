@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package se.kth.iv1350.amazingpos.startup;
 
+import se.kth.iv1350.amazingpos.controller.Controller;
+import se.kth.iv1350.amazingpos.view.View; 
 /**
  *Contains the main method to start the application. 
- * @author sushi
  */
 public class Main {
-    
+    /**
+     *  The main method used to start the entire application.
+     * @param args The application does not take any comand line parameters. 
+    */
+    public static void main(String[] args){
+        Controller contr = new Controller(); 
+        new View(contr).runFakeExecution(); 
+    }
 }
