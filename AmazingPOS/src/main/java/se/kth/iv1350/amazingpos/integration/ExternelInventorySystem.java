@@ -1,13 +1,17 @@
 package se.kth.iv1350.amazingpos.integration;
 import se.kth.iv1350.amazingpos.model.*;
+import java.util.ArrayList;
 /**
  * Inventory system has the information about how many items there are in the sore 
  * and other information about the items.
  * @author Sushil's pc
  */
 public class ExternelInventorySystem {
-    private ItemInformationDTO itemsInInventory[] = new ItemInformationDTO[20]; 
-    
+     
+
+    private ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
+
+
     /**
      * An instance of the EXternelInventorySystem. 
      */
@@ -22,12 +26,22 @@ public class ExternelInventorySystem {
      * it returns null. 
      */
     public ItemInformationDTO getItemInfomation (String itemIdentifier){
-        for (ItemInformationDTO itemsInInventoryLoopVariabel : itemsInInventory) {
+        for (ItemInformationDTO itemsInInventoryLoopVariabel : itemList) {
             if (itemsInInventoryLoopVariabel.getItemIdentifier().equals(itemIdentifier)) {
                 return itemsInInventoryLoopVariabel;
             }   
         }
     return null; 
+    }
+
+    /**
+     * Adds a new item to the inventory where all the information about the items are stored.  
+     * @param item The item that is added to the inventory. 
+     */
+    public void additem(ItemInformationDTO item){
+        if (item != null){
+            itemList.add(item); 
+        }
     }
     
     /**

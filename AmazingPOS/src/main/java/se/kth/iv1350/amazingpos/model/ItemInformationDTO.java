@@ -18,6 +18,7 @@ public class ItemInformationDTO {
      * @param itemIdentifier. The zipcode that represents the item.
      * @param itemPrice. The price of the item.
      * @param itemVATRate. The VAT rate of the item. 
+     * @param quantity. Amount of item, 
      */
     public ItemInformationDTO(String itemName, String itemIdentifier, double itemPrice,
                               double itemVATRate, int quantity){
@@ -26,6 +27,18 @@ public class ItemInformationDTO {
         this.itemPrice = itemPrice; 
         this.itemVATRate = itemVATRate; 
         this.quantity = quantity; 
+    }
+
+    /**
+     * Creates new default of iteminformationDTO
+     */
+    public ItemInformationDTO(){
+        itemName ="";
+        itemPrice = 0;
+        itemIdentifier = "";
+        itemVATRate = 0;
+        quantity = 0;  
+
     }
     
     /**

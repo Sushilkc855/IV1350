@@ -8,19 +8,19 @@ public class CashPayment {
     /**
      * Creates a new instance of class CashPayment
      *
-     * @param sale Contains the information about the sale. 
      * @param payedAmount the amount that is payed by the customer
      */
-    public CashPayment(Sale sale, double payedAmount){
+    public CashPayment(double payedAmount){
         this.payedAmount = payedAmount;
         this.sale = sale; 
     }
 
     /**
      * This method counts how much change to give to customer.
+     * @param sale Contains the information about the sale.
      * @param payedAmount  the amount that is payed by the customer
      */
-    public double changeToGiveCustomer(double payedAmount){
+    public double changeToGiveCustomer(Sale sale, double payedAmount){
         changeForCustomer =  payedAmount - sale.getTotalAmount(); 
         return changeForCustomer; 
     }

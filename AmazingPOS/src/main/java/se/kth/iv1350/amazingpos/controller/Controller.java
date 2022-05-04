@@ -15,6 +15,8 @@ public class Controller {
     private boolean itemCheck;
     private CashPayment cashPayment; 
     private double change; 
+    private Printer printer;
+    private Receipt receipt; 
     /**
      * Start a new sale. This method must be called before doing anything else 
      * during a sale. 
@@ -34,17 +36,14 @@ public class Controller {
         return itemCheck; 
     }
     
-    
-    
     /**
      * This method calls for externelInventorySystem to get information about a specefic item. 
      * @param itemIdentifier. A number or barcode that represents a specific item.
-     * @param itemQuantity. Number of items.
      * @return Returns the information about the item and it is not in iventory it retuns null.   
      */
-    public ItemInformationDTO getItemInfo (String itemIdentifier, int itemQuantity){
+    public ItemInformationDTO getItemInfo (String itemIdentifier){
         ItemInformationDTO itemInfo = externelInventorySystem.getItemInfomation(itemIdentifier); 
-        sale.additem(itemInfo, itemQuantity, itemCheck);
+        sale.additem(itemInfo, itemCheck);
         return itemInfo; 
     }
 
@@ -60,7 +59,7 @@ public class Controller {
      * @return this method gets the chage that is needed to give to the customer. 
      */
     public double registerPayment (double amoutPayedByCustomer){
-        change = cashPayment.changeToGiveCustomer(amoutPayedByCustomer);
+        change = cashPayment.changeToGiveCustomer(sale, amoutPayedByCustomer);
         return change; 
     }
 
@@ -71,13 +70,31 @@ public class Controller {
     public void endSale(){
     }
 
-
+     /**
+     * updates the externel inventory system. 
+     * @param sale Has the information about the curren. 
+     */
     public void updateInventorySystem(Sale sale){
         externelInventorySystem.updateInventory(sale);
     }
 
+    /**
+     * updates the externel accounting system. 
+     * @param sale Has the information about the curren. 
+     */
     public void updateAccountingSystem(Sale sale){
         externelAccountingSystem.updateAccountingSystem(sale);
     }
    
+
+    public Receipt getReceipt(Sale sale, StoreAddress storeAddress, CashPayment cashPayment){
+        return receipt; 
+    }
+
+    /**
+     * This method prints out the receipt. 
+     */
+    public void printReceipt(){
+        printer.printReceipt(receipt);
+    }
 }
