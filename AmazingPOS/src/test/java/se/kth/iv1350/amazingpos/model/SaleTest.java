@@ -26,6 +26,7 @@ public class SaleTest {
 
     }
     
+    
     @AfterEach
     public void tearDown() {
         itemInfo1 = null; 
@@ -39,7 +40,7 @@ public class SaleTest {
         ArrayList<ItemInformationDTO> testItemList = saleInstance.getListOfItems();  
         ArrayList<ItemInformationDTO> goodsItemList = new ArrayList<ItemInformationDTO>();  
         goodsItemList.add(itemInfo1); 
-        assertEquals(testItemList.get(0), goodsItemList.get(0), "The items in the two lists are not the same");   
+        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items in the two lists are not the same");   
     }
 
     @Test
@@ -54,9 +55,9 @@ public class SaleTest {
         goodsItemList.add(itemInfo2);
         goodsItemList.add(itemInfo3);
 
-        assertEquals(testItemList.get(0), goodsItemList.get(0), "The items1 in the two lists are not the same");   
-        assertEquals(testItemList.get(1), goodsItemList.get(1), "The items2 in the two lists are not the same");
-        assertEquals(testItemList.get(2), goodsItemList.get(2), "The items3 in the two lists are not the same");
+        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items1 in the two lists are not the same");   
+        assertEquals(testItemList.get(1).getItemIdentifier(), goodsItemList.get(1).getItemIdentifier(), "The items2 in the two lists are not the same");
+        assertEquals(testItemList.get(2).getItemIdentifier(), goodsItemList.get(2).getItemIdentifier(), "The items3 in the two lists are not the same");
     }
 
     @Test
@@ -69,7 +70,7 @@ public class SaleTest {
         ArrayList<ItemInformationDTO> goodsItemList = new ArrayList<ItemInformationDTO>();  
         goodsItemList.add(itemInfo2); 
         
-        assertEquals(testItemList.get(0), goodsItemList.get(0), "Item added when it is already registered");  
+        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "Item added when it is already registered");  
     }
 
 
