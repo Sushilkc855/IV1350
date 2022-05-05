@@ -37,17 +37,25 @@ public class View {
         double itemPrice = itemInformation.getItemPrice(); 
         String barcode = itemInformation.getItemIdentifier(); 
         String itemName = itemInformation.getItemName(); 
-        System.out.println(barcode);
-        System.out.println(itemName);
-        System.out.println(itemPrice);
+        double getItemVATRate = itemInformation.getItemVATRate();  
+        System.out.println("items barCode, " + barcode);
+        System.out.println("item name, " + itemName);
+        System.out.println("item price, " + itemPrice);
+        System.out.println("item Vat Rate, " + getItemVATRate);
+
 
         boolean register = contr.itemAlreadyRegister("AppleBarCode");
         //false because it is not registered in sale yet. 
         System.out.println(register);
 
-        // The total amount for tha sale 
-        System.out.println(contr.totalAmoutn());
+        
+        System.out.println("The curren Running total for the sale, "+ contr.runningTotal());
 
+        // The total amount for tha sale 
+        System.out.println("The total amount for the sale, "+ contr.totalAmoutn());
+
+
+        System.out.println("Returns how much change to give customer, " + contr.registerPayment(300.2));
 
     }
 

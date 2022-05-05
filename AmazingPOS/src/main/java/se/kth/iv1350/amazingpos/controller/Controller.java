@@ -13,10 +13,10 @@ public class Controller {
     private ExternelAccountingSystem externelAccountingSystem; 
     private DiscountDB discountDB; 
     private boolean itemCheck;
-    private CashPayment cashPayment; 
     private double change; 
     private Printer printer;
     private Receipt receipt; 
+    CashPayment cashPayment = new CashPayment();
     /**
      * Start a new sale. This method must be called before doing anything else 
      * during a sale. 
@@ -49,6 +49,14 @@ public class Controller {
     }
 
     /**
+     * gets the current sale running total
+     * @return the currents sale running total. 
+     */
+    public double runningTotal (){
+        double runningTotal = sale.countRunningTotal();
+        return runningTotal;
+    }
+    /**
      * @return This method returns the Totalamount of the entire sale. 
      */
     public double totalAmoutn(){
@@ -59,7 +67,7 @@ public class Controller {
      * @param amountPayed This is the amount payed by the customer.
      * @return this method gets the chage that is needed to give to the customer. 
      */
-    public double registerPayment (double amoutPayedByCustomer){
+    public double registerPayment (double amoutPayedByCustomer){ 
         change = cashPayment.changeToGiveCustomer(sale, amoutPayedByCustomer);
         return change; 
     }

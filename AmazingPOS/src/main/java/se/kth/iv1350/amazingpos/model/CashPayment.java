@@ -7,12 +7,8 @@ public class CashPayment {
 
     /**
      * Creates a new instance of class CashPayment
-     *
-     * @param payedAmount the amount that is payed by the customer
      */
-    public CashPayment(double payedAmount){
-        this.payedAmount = payedAmount;
-        this.sale = sale; 
+    public CashPayment(){
     }
 
     /**

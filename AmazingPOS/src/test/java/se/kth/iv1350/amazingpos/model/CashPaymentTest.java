@@ -33,7 +33,7 @@ public class CashPaymentTest {
         double cashPayed = 100;
         double expResult = 20;
 
-        CashPayment payment = new CashPayment(cashPayed); 
+        CashPayment payment = new CashPayment(); 
         double result = payment.changeToGiveCustomer(sale, cashPayed);
 
         assertEquals(expResult, result, "The test case is a prototype.");

@@ -13,7 +13,7 @@ public class ExternelInventorySystem {
      * An instance of the EXternelInventorySystem. 
      */
     public ExternelInventorySystem(){
-        itemList.add(new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10));
+        itemList.add(new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10)); 
     }
   
       /**

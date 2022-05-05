@@ -10,7 +10,6 @@ public class Sale {
     LocalTime saleTime; 
     private Receipt receipt;
     private ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
-    private double runningTotal; 
     private double totalAmout;
     
     /**
@@ -64,6 +63,7 @@ public class Sale {
      * @return returng the current running total of the sale.  
      */
     public double countRunningTotal(){
+        double runningTotal = 0; 
         for(int itemInItemList = 0; itemInItemList < itemList.size(); itemInItemList++){
             runningTotal +=  itemList.get(itemInItemList).quantity * itemList.get(itemInItemList).getItemPrice();  
         }
