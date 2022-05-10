@@ -31,8 +31,7 @@ public class Controller {
      * @return if the item has already been register it retruns true else it returns false.
      */
     public boolean itemAlreadyRegister(String itemIdentifier){
-        Sale registetionInfo = new Sale(); 
-        itemCheck =  registetionInfo.checkIfItemAlreadyRegister(itemIdentifier);
+        itemCheck =  sale.checkIfItemAlreadyRegister(itemIdentifier);
         return itemCheck; 
     }
     
@@ -100,6 +99,7 @@ public class Controller {
         return receipt; 
     }
 
+    
     /**
      * This method prints out the receipt. 
      */
