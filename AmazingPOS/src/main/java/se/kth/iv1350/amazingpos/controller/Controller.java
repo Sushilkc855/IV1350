@@ -10,12 +10,11 @@ import se.kth.iv1350.amazingpos.integration.*;
 public class Controller {   
     private Sale sale; 
     private ExternelInventorySystem externelInventorySystem = new ExternelInventorySystem(); 
-    private ExternelAccountingSystem externelAccountingSystem; 
-    private DiscountDB discountDB; 
-    private boolean itemCheck;
+    private ExternelAccountingSystem externelAccountingSystem;
     private double change; 
     private Printer printer;
     private Receipt receipt; 
+    private StoreAddress storeAddress; 
     CashPayment cashPayment = new CashPayment();
     /**
      * Start a new sale. This method must be called before doing anything else 
@@ -25,27 +24,17 @@ public class Controller {
         sale = new Sale(); 
     }
    
-    /**
-     * This methid calls for checkIfItemAlreadyRegister metod to see if a item already has been registered.
-     * @param itemIdentifier A number or barcode that represents a specific item.
-     * @return if the item has already been register it retruns true else it returns false.
-     */
-    public boolean itemAlreadyRegister(String itemIdentifier){
-        itemCheck =  sale.checkIfItemAlreadyRegister(itemIdentifier);
-        return itemCheck; 
-    }
     
     /**
-     * This method calls for externelInventorySystem to get information about a specefic item. 
+     * ScanItems. Adds a scanned item to the current sale. 
      * @param itemIdentifier. A number or barcode that represents a specific item.
      * @return Returns the information about the item and it is not in iventory it retuns null.   
      */
-    public ItemInformationDTO getItemInfo (String itemIdentifier){
-        ItemInformationDTO itemInfo = externelInventorySystem.getItemInfomation(itemIdentifier); 
-        itemCheck = itemAlreadyRegister(itemIdentifier);
-        sale.additem(itemInfo, itemCheck);
+    public ItemInformationDTO scanItem (String itemIdentifier, int quantity){
+        ItemInformationDTO itemInfo =  sale.additem(itemIdentifier, quantity);
         return itemInfo; 
     }
+
 
     /**
      * gets the current sale running total
@@ -55,6 +44,7 @@ public class Controller {
         double runningTotal = sale.countRunningTotal();
         return runningTotal;
     }
+    
     /**
      * @return This method returns the Totalamount of the entire sale. 
      */
@@ -88,15 +78,22 @@ public class Controller {
 
     /**
      * updates the externel accounting system. 
-     * @param sale Has the information about the curren. 
+     * @param sale Has the information about the current sale. 
      */
     public void updateAccountingSystem(Sale sale){
         externelAccountingSystem.updateAccountingSystem(sale);
     }
    
 
+    /**
+     * this methods is used for getting the nessery information in receipt. 
+     * @param sale  Has the information about the current sale
+     * @param storeAddress Address of the store
+     * @param cashPayment Information about the change and payment. 
+     * @return
+     */
     public Receipt getReceipt(Sale sale, StoreAddress storeAddress, CashPayment cashPayment){
-        return receipt; 
+         return new Receipt(sale, storeAddress, cashPayment); 
     }
 
     
@@ -104,6 +101,7 @@ public class Controller {
      * This method prints out the receipt. 
      */
     public void printReceipt(){
+        receipt = getReceipt(sale, storeAddress, cashPayment); 
         printer.printReceipt(receipt);
     }
 }

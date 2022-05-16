@@ -1,5 +1,5 @@
 package se.kth.iv1350.amazingpos.model;
-
+import se.kth.iv1350.amazingpos.integration.*; 
 import java.util.ArrayList;
 import java.time.LocalTime; 
 /**
@@ -11,7 +11,9 @@ public class Sale {
     private Receipt receipt;
     private ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
     private double totalAmout;
-    
+    private int itemInItemList;
+    private boolean itemCheck;
+    private ExternelInventorySystem externelInventorySystem = new ExternelInventorySystem(); 
     /**
      * Creates a new instance and saves the time of the sale.
     */
@@ -27,26 +29,43 @@ public class Sale {
      * @return if the item has already been register it retruns true else it returns false. 
      */
     public boolean checkIfItemAlreadyRegister (String itemIdentifier){
-        for(int itemInItemList = 0; itemInItemList < itemList.size(); itemInItemList++) {
+        for( itemInItemList = 0; itemInItemList < itemList.size(); itemInItemList++) {
             if(itemIdentifier.equals(itemList.get(itemInItemList).getItemIdentifier())) {
-                itemList.get(itemInItemList).quantity +=1; 
                 return true; 
             }
         }
     return false; 
     }
     
+    /**
+     * If an item is already been registered this method increases the quntity of the item. 
+     * @param itemIdentifier A number or barcode that represents a specific item.
+     */
+    public ItemInformationDTO increaseQuantity (String itemIdentifier, int quantity){
+        itemList.get(itemInItemList).quantity += quantity; 
+        return itemList.get(itemInItemList); 
+    }
+
     
     /**
-     * Adds a new item to the itemList where all the information about the items 
-     * are stored if the item is not empty. If the item alreasy been registered it just adds up the quantity.
-     * @param item: It has the information about the item to be added
-     * @param itemCheck: A boolen that is true if an item has already been registered or false if it not.  
+     * This method calls for externelInventorySystem to get information about a specefic item.
+     * and adds it to the sale but if an item already has been registered it just adds up the quantity. 
+     * @param itemIdentifier: A code that represents an specific item. 
+     * @param qiantity: the quantity of the item 
+     * @return : retruns the information about the item. But if it is already registered it returns the information 
+     *                with the updated quantity. 
     */
-    public void additem(ItemInformationDTO item, boolean itemCheck){
-        if (item != null && itemCheck == false){
-            itemList.add(new ItemInformationDTO(item.getItemName(), item.getItemIdentifier(), item.getItemPrice(), item.getItemVATRate(), item.getItemQuantity())); 
+    public ItemInformationDTO additem(String itemIdentifier, int quantity){
+        itemCheck = checkIfItemAlreadyRegister(itemIdentifier);
+        if (itemCheck == false) {
+            ItemInformationDTO item = externelInventorySystem.getItemInfomation(itemIdentifier, quantity); 
+             itemList.add(new ItemInformationDTO(item.getItemName(), item.getItemIdentifier(), item.getItemPrice(), item.getItemVATRate(), item.getItemQuantity())); 
+             return item; 
         }
+        else{
+            ItemInformationDTO item = increaseQuantity(itemIdentifier, quantity);
+            return item; 
+            }
     }
 
 

@@ -17,7 +17,7 @@ public class ExternelInventorySystemTest {
     
     @BeforeEach
     public void setUp() {
-        itemInfo1 = new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10); 
+        itemInfo1 =new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10); 
     }
     
     @AfterEach
@@ -32,9 +32,12 @@ public class ExternelInventorySystemTest {
         String itemIdentifier = "AppleBarCode";
         ItemInformationDTO expResult = itemInfo1;
 
-        ItemInformationDTO result = inventoryInstance.getItemInfomation(itemIdentifier);
-        assertEquals(expResult, result, "The item was not fount in inventory");
+        ItemInformationDTO result = inventoryInstance.getItemInfomation(itemIdentifier, 10);
+        assertEquals(expResult.getItemIdentifier(), result.getItemIdentifier(), "The item was not fount in inventory");
+        assertEquals(expResult.getItemName(), result.getItemName(), "The item was not fount in inventory");
+        assertEquals(expResult.getItemPrice(), result.getItemPrice(), "The item was not fount in inventory");
     }
+    
 
     @Test
     public void testGetItemInformationNull() {
@@ -44,7 +47,7 @@ public class ExternelInventorySystemTest {
         String itemIdentifier = "OrgangebarCode";
         ItemInformationDTO expResult = null;
 
-        ItemInformationDTO result = inventoryInstance.getItemInfomation(itemIdentifier);
+        ItemInformationDTO result = inventoryInstance.getItemInfomation(itemIdentifier, 10);
         assertEquals(expResult, result, "The item was not fount in inventory");
     }
 }

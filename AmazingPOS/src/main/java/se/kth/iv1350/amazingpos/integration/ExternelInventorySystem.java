@@ -11,9 +11,11 @@ public class ExternelInventorySystem {
     public ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
     /**
      * An instance of the EXternelInventorySystem. 
+     * The items in the list are for testing purposes. 
      */
     public ExternelInventorySystem(){
         itemList.add(new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10)); 
+        itemList.add(new ItemInformationDTO("Milk", "MilkBarCode", 10, 0.11, 2));
     }
   
       /**
@@ -33,7 +35,7 @@ public class ExternelInventorySystem {
      * @return  If they are the same this method returns information abour the item. else
      * it returns null. 
      */
-    public ItemInformationDTO getItemInfomation (String itemIdentifier){
+    public ItemInformationDTO getItemInfomation (String itemIdentifier, int quantity){
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getItemIdentifier().equals(itemIdentifier)) {
                 return itemList.get(i);

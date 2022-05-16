@@ -18,7 +18,7 @@ public class CashPaymentTest {
     
     @BeforeEach
     public void setUp() {
-        itemInfo1 = new ItemInformationDTO("Apple", "AppleBarCode", 8, 0.13, 10); 
+        itemInfo1 = new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10); 
     }
     
     @AfterEach
@@ -29,9 +29,9 @@ public class CashPaymentTest {
     @Test
     public void testChangeToGiveCostumer() {
         Sale sale = new Sale(); 
-        sale.additem(itemInfo1, false);
-        double cashPayed = 100;
-        double expResult = 20;
+        sale.additem("AppleBarCode", 10);
+        double cashPayed = 200;
+        double expResult = 50;
 
         CashPayment payment = new CashPayment(); 
         double result = payment.changeToGiveCustomer(sale, cashPayed);

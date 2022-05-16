@@ -35,42 +35,38 @@ public class SaleTest {
     }
 
     @Test
+    public void testIncreaseQuantity() {
+        Sale instance = new Sale();
+        instance.additem("AppleBarCode", 10);
+       ItemInformationDTO item =  instance.increaseQuantity("AppleBarCode", 11);
+        int expResult = 21; 
+        int result = item.getItemQuantity();
+        assertEquals(expResult, result, "The test case is a prototype.");
+    }
+    
+    @Test
     public void testAddOneItem() {
-        saleInstance.additem(itemInfo1, itemCheckFalse);
+        saleInstance.additem("AppleBarCode", 10);
         ArrayList<ItemInformationDTO> testItemList = saleInstance.getListOfItems();  
         ArrayList<ItemInformationDTO> goodsItemList = new ArrayList<ItemInformationDTO>();  
         goodsItemList.add(itemInfo1); 
-        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items in the two lists are not the same");   
+        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items in the two lists are not the same"); 
+        assertEquals(testItemList.get(0).getItemName(), goodsItemList.get(0).getItemName(), "The items in the two lists are not the same");   
+        assertEquals(testItemList.get(0).getItemPrice(), goodsItemList.get(0).getItemPrice(), "The items in the two lists are not the same");     
     }
 
     @Test
     public void testAddMultipelItem() {
-        saleInstance.additem(itemInfo1, itemCheckFalse);
-        saleInstance.additem(itemInfo2, itemCheckFalse);
-        saleInstance.additem(itemInfo3, itemCheckFalse);
+        saleInstance.additem("AppleBarCode", 10);
+        saleInstance.additem("MilkBarCode", 2);
         ArrayList<ItemInformationDTO> testItemList = saleInstance.getListOfItems();  
 
         ArrayList<ItemInformationDTO> goodsItemList = new ArrayList<ItemInformationDTO>();  
         goodsItemList.add(itemInfo1); 
         goodsItemList.add(itemInfo2);
-        goodsItemList.add(itemInfo3);
 
-        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items1 in the two lists are not the same");   
-        assertEquals(testItemList.get(1).getItemIdentifier(), goodsItemList.get(1).getItemIdentifier(), "The items2 in the two lists are not the same");
-        assertEquals(testItemList.get(2).getItemIdentifier(), goodsItemList.get(2).getItemIdentifier(), "The items3 in the two lists are not the same");
-    }
-
-    @Test
-    public void testAddOneItemAlreadyRegister() {
-        Sale instance = new Sale();
-        instance.additem(itemInfo1, itemCheckTrue);
-        instance.additem(itemInfo2, itemCheckFalse);
-        ArrayList<ItemInformationDTO> testItemList = instance.getListOfItems();  
-
-        ArrayList<ItemInformationDTO> goodsItemList = new ArrayList<ItemInformationDTO>();  
-        goodsItemList.add(itemInfo2); 
-        
-        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "Item added when it is already registered");  
+        assertEquals(testItemList.get(0).getItemIdentifier(), goodsItemList.get(0).getItemIdentifier(), "The items in the two lists are not the same");   
+        assertEquals(testItemList.get(1).getItemIdentifier(), goodsItemList.get(1).getItemIdentifier(), "The items in the two lists are not the same");
     }
 
 
@@ -89,7 +85,7 @@ public class SaleTest {
         String itemIdentifier = "AppleBarCode";
          boolean expResult = true;
         Sale instance = new Sale();
-        instance.additem(itemInfo1, itemCheckFalse);
+        instance.additem("AppleBarCode", 2);
         
         boolean result = instance.checkIfItemAlreadyRegister(itemIdentifier);
         assertEquals(expResult, result, "Item detected when it's not in the sale list.");
@@ -98,8 +94,8 @@ public class SaleTest {
     @Test
     public void testCountRunningTotal() {
         Sale instance = new Sale();
-        instance.additem(itemInfo1, itemCheckFalse);
-        instance.additem(itemInfo2, itemCheckFalse);
+        instance.additem("AppleBarCode", 10);
+        instance.additem("MilkBarCode", 2);
         double runningTotal = instance.countRunningTotal();
 
         double testRunningTotal = itemInfo1.getItemQuantity() * itemInfo1.getItemPrice(); 
@@ -111,8 +107,8 @@ public class SaleTest {
     @Test
     public void testGetTotalAmount() {
         Sale instance = new Sale();
-        instance.additem(itemInfo1, itemCheckFalse);
-        instance.additem(itemInfo2, itemCheckFalse);
+        instance.additem("AppleBarCode", 10);
+        instance.additem("MilkBarCode", 2);
         double runningTotal = instance.getTotalAmount();
 
         double testGetExpectedTotalAmount = itemInfo1.getItemQuantity() * itemInfo1.getItemPrice(); 
