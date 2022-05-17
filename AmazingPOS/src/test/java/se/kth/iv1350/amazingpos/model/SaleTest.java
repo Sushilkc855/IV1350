@@ -38,7 +38,7 @@ public class SaleTest {
     public void testIncreaseQuantity() {
         Sale instance = new Sale();
         instance.additem("AppleBarCode", 10);
-       ItemInformationDTO item =  instance.increaseQuantity("AppleBarCode", 11);
+        ItemInformationDTO item =  instance.increaseQuantity("AppleBarCode", 11);
         int expResult = 21; 
         int result = item.getItemQuantity();
         assertEquals(expResult, result, "The test case is a prototype.");

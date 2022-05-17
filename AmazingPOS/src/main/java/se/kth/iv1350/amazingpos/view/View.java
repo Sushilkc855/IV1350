@@ -33,13 +33,14 @@ public class View {
     
 
         System.out.println("Gets the information about the items with the bara code that is in inventory system");
-        contr.scanItem("AppleBarCode", 10); 
+        ItemInformationDTO item = contr.scanItem("AppleBarCode", 10); 
+        System.out.println(item.getItemName());
         System.out.println("A item has been scanned");
         
         System.out.println("The current Running total for the sale, "+ contr.runningTotal());
 
         // The total amount for tha sale 
-        System.out.println("The total amount for the sale, "+ contr.totalAmoutn());
+        System.out.println("The total amount for the sale, "+ contr.totalAmount());
 
 
         System.out.println("Returns how much change to give customer, " + contr.registerPayment(300.2));

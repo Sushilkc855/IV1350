@@ -48,7 +48,7 @@ public class Controller {
     /**
      * @return This method returns the Totalamount of the entire sale. 
      */
-    public double totalAmoutn(){
+    public double totalAmount(){
         return sale.getTotalAmount(); 
     }
 
