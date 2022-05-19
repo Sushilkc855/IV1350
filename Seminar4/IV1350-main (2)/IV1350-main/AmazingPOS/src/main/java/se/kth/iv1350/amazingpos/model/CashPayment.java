@@ -17,13 +17,8 @@ public class CashPayment {
      * @param payedAmount  the amount that is payed by the customer
      */
     public double changeToGiveCustomer(Sale sale, double payedAmount){
-        this.payedAmount = payedAmount;
-        changeForCustomer =  payedAmount - sale.getTotalAmount(); 
+        changeForCustomer =  payedAmount - sale.countRunningTotal(); 
         return changeForCustomer; 
-    }
-
-    public double getPayedAmount(){
-        return this.payedAmount;
     }
 
 }

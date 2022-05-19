@@ -32,7 +32,7 @@ public class Receipt {
         this.sale = sale; 
         this.storeAddress = storeAddress; 
         this.cashPayment = cashPayment;
-        this.change = cashPayment.changeToGiveCustomer(sale, cashPayment.getPayedAmount()); 
+        this.change = cashPayment.changeToGiveCustomer(sale, paidAmount); 
         this.saleTime = sale.saleTime; 
         this.totalPrice = sale.getTotalAmount(); 
         this.listOfItems = sale.getListOfItems(); 
