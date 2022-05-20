@@ -97,12 +97,21 @@ public class Sale {
      */
     public double getTotalAmount(){
         totalAmout = countRunningTotal();
-        notifyObservers();
         return totalAmout; 
     }
 
     /**
-     * 
+     * This methos registers payment payed by customer.
+     * @param amoutPayedByCustomer  the cash payed by cutomer 
+     * @return the total amount of the sale 
+     */
+    public double registerPayment(double amoutPayedByCustomer){
+        notifyObservers();
+        return getTotalAmount();
+    }
+
+    /**
+     * Goes throw the list of observers and calls moethod completedSale for each if them. 
      */
     private void notifyObservers() {
         for (RevenueObserver obs: revenueObservers){

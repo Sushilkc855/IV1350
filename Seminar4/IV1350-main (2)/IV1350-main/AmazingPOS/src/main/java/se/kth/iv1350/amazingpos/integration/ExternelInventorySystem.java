@@ -16,6 +16,9 @@ public class ExternelInventorySystem {
     public ExternelInventorySystem(){
         itemList.add(new ItemInformationDTO("Apple", "AppleBarCode", 15, 0.13, 10)); 
         itemList.add(new ItemInformationDTO("Milk", "MilkBarCode", 10, 0.11, 2));
+        itemList.add(new ItemInformationDTO("Milk", "1", 10, 0.11, 6));
+        itemList.add(new ItemInformationDTO("Milk", "2", 5, 0.11, 6));
+        itemList.add(new ItemInformationDTO("Milk", "4", 10, 0.11, 6));
     }
   
       /**
@@ -34,7 +37,8 @@ public class ExternelInventorySystem {
      * @param itemIdentifier. A number or barcode that represents a specific item. 
      * @return  If they are the same this method returns information abour the item. else
      * it returns null. 
-     * @throws ItemNotFoundInInventoryException
+     * @throws ItemNotFoundInInventoryException an item with a specefic itemidentifier is not found in inventory
+     * @throws DatabaseServerNotRunning indicates that the database can not be called
      */
     public ItemInformationDTO getItemInfomation (String itemIdentifier, int quantity) throws ItemNotFoundInInventoryException, DatabaseServerNotRunning{
         for (int i = 0; i < itemList.size(); i++) {
@@ -45,7 +49,7 @@ public class ExternelInventorySystem {
                 throw new DatabaseServerNotRunning("The database is currently offline");
             }
             else{
-                throw new ItemNotFoundInInventoryException("This item with itemIdentifier: "+ itemIdentifier+ " was not fount in inventory" );
+                throw new ItemNotFoundInInventoryException("This item with itemIdentifier: "+ itemIdentifier+ " was not found in inventory" );
             }
         }
         

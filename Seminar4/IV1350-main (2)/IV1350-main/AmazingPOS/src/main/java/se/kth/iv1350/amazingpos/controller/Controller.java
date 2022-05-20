@@ -4,6 +4,7 @@ import se.kth.iv1350.amazingpos.model.*;
 import se.kth.iv1350.amazingpos.util.*;
 import se.kth.iv1350.amazingpos.view.TotalRevenueView;
 
+import java.net.NetPermission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Controller {
     private Receipt receipt; 
     private StoreAddress storeAddress; 
     CashPayment cashPayment = new CashPayment();
-    private LogWriter log; 
+    private LogWriter log = new LogWriter(); 
     private List<RevenueObserver> revenueObservers = new ArrayList<RevenueObserver>();
     
 
@@ -69,20 +70,15 @@ public class Controller {
         return runningTotal;
     }
     
-    /**
-     * @return This method returns the Totalamount of the entire sale. 
-     */
-    public double totalAmount(){
-        double totalAmount = sale.getTotalAmount();
-        return totalAmount; 
-    }
+
 
     /**
      * @param amountPayed This is the amount payed by the customer.
      * @return this method gets the chage that is needed to give to the customer. 
      */
     public double registerPayment (double amoutPayedByCustomer){ 
-        change = cashPayment.changeToGiveCustomer(sale, amoutPayedByCustomer);
+        double totalAmount = sale.registerPayment(amoutPayedByCustomer);
+        change = cashPayment.changeToGiveCustomer(totalAmount, amoutPayedByCustomer);
         return change; 
     }
 
@@ -101,6 +97,14 @@ public class Controller {
         externelInventorySystem.updateInventory(sale);
     }
 
+    /**
+     * @return This method returns the Totalamount of the entire sale. 
+     */
+    public double totalAmount(){
+        double totalAmount = sale.getTotalAmount();
+        return totalAmount; 
+    }
+    
     /**
      * updates the externel accounting system. 
      * @param sale Has the information about the current sale. 
