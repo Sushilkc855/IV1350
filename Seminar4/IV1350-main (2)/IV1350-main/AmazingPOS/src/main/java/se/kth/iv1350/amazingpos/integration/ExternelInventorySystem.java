@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ExternelInventorySystem {
     
     public ArrayList<ItemInformationDTO> itemList = new ArrayList<ItemInformationDTO>(); 
+   
     /**
      * An instance of the EXternelInventorySystem. 
      * The items in the list are for testing purposes. 
@@ -48,12 +49,9 @@ public class ExternelInventorySystem {
             else if(itemIdentifier == "InvalidItemName"){
                 throw new DatabaseServerNotRunning("The database is currently offline");
             }
-            else{
-                throw new ItemNotFoundInInventoryException("This item with itemIdentifier: "+ itemIdentifier+ " was not found in inventory" );
-            }
         }
         
-    return null; 
+        throw new ItemNotFoundInInventoryException("This item with itemIdentifier: "+ itemIdentifier+ " was not found in inventory" );
     }
 
   
